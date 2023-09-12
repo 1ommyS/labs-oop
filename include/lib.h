@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+using namespace std;
 
-std::string convertDateTo24HrFormat(int hours, int minutes,
-                                    const std::string &period);
+string convertDateTo24HrFormat(int hours, int minutes,
+                                    const string &period);
