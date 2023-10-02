@@ -1,8 +1,20 @@
-cmake_minimum_required(VERSION 3.10)
-project(lab0)
+cmake_minimum_required(VERSION 3.13)
+project(lab0 VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(
+    -Werror
+
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+if(NOT CMAKE_CXX_EXTENSIONS)
+    set(CMAKE_CXX_EXTENSIONS OFF)
+endif()
 
 add_compile_options(-g -rdynamic)
 

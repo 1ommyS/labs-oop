@@ -3,7 +3,7 @@
 build: clean-build
 	mkdir build
 	git submodule init
-	git submodule update
+	git submodule update --remote
 	cd ./build; cmake ..; make all
 
 run:

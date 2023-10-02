@@ -1,6 +1,10 @@
 #pragma once
 
+#include <ostream>
+
 #include "vector.h"
+
+using namespace std;
 
 class Three {
 private:
@@ -9,11 +13,11 @@ private:
 public:
     Three();
 
-    Three(const size_t &n, unsigned char t);
+    Three(const size_t &n);
 
-    Three(const std::initializer_list<unsigned char> &t);
+    Three(const initializer_list<unsigned char> &t);
 
-    Three(const std::string &t);
+    Three(const string &t);
 
     Three(uint64_t number);
 

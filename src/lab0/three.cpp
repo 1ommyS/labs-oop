@@ -7,7 +7,7 @@ Three::Three() {
 
 }
 
-Three::Three(const size_t &n, unsigned char t) { _digits.resize(n, t); }
+Three::Three(const size_t &n) { _digits.resize(n); }
 
 Three::Three(const std::initializer_list<unsigned char> &t) {
     _digits.reserve(t.size());
@@ -16,14 +16,6 @@ Three::Three(const std::initializer_list<unsigned char> &t) {
             throw std::invalid_argument("Некорректный формат ввода");
 
         _digits.push_back(value);
-    }
-}
-
-Three::Three(const std::string &t) : Three::Three(std::stoull(t)) {
-    // Проверка на корректность ввода
-    for (const char &c: t) {
-        if (c < '0' || c > '2')
-            throw std::invalid_argument("Некорректный формат ввода");
     }
 }
 
@@ -89,7 +81,7 @@ Three Three::operator-(const Three &other) const {
     Three result;
 
     // Определите максимальный размер между _digits текущего экземпляра и _digits экземпляра other
-    size_t max_size = std::max(_digits.size(), other._digits.size());
+    size_t max_size = max(_digits.size(), other._digits.size());
 
     // Переменная, чтобы хранить заем разряда
     unsigned char borrow = 0;
