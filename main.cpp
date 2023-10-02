@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "lib.h"
+#include "three.h"
 
 using namespace std;
 
 int main() {
-    cout << "Bruh: " << endl
-         << A() << endl;
+    Three three("152");
+    cout << three << endl;
 }
