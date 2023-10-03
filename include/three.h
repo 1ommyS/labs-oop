@@ -1,56 +1,54 @@
 #pragma once
 
 #include <ostream>
-
+#include "../src/lab0/vector.cpp"
 #include "vector.h"
 
 using namespace std;
 
 class Three {
-private:
-    Vector<unsigned char> _digits;
-
 public:
     Three();
 
-    Three(const size_t &n);
+    Three(uint64_t n);
 
-    Three(const initializer_list<unsigned char> &t);
+    Three(const Three &oth) noexcept;
 
-    Three(const string &t);
+    Three(const std::string &str);
 
-    Three(uint64_t number);
+    Three(Three &&oth) noexcept;
 
-    Three(const Three &other);
+    Three &operator=(Three &&oth) noexcept;
 
-    Three(Three &&other) noexcept;
+    Three &operator=(Three oth) {
+        _digits = oth._digits;
+        return *this;
+    }
 
-    ~Three();
+    Three &operator++() noexcept;
 
-    // Перегрузка операторов
-    Three &operator=(const Three &other);
+    Three operator++(int) noexcept;
 
-    Three operator+(const Three &other) const;
+    Three &operator--();
+
+    Three operator--(int);
+
+    Three operator+(const Three &oth) const noexcept;
 
     Three operator-(const Three &other) const;
 
-    Three operator++(int) const;
+    bool operator==(const Three &oth) const;
 
-    Three operator--(int) const;
+    bool operator!=(const Three &oth) const;
 
-    bool operator==(const Three &other) const;
+    bool operator>(const Three &oth) const;
 
-    bool operator!=(const Three &other) const;
-
-    bool operator<(const Three &other) const;
-
-    bool operator>(const Three &other) const;
-
-    bool operator<=(const Three &other) const;
-
-    bool operator>=(const Three &other) const;
+    bool operator<(const Three &oth) const;
 
     void print() const;
 
-    friend std::ostream &operator<<(std::ostream &stream, const Three &three);
+    friend std::ostream &operator<<(std::ostream &stream, const Three &Three);
+
+private:
+    Vector<unsigned char> _digits;
 };

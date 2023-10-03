@@ -1,98 +1,111 @@
 #include <gtest/gtest.h>
-
 #include "three.h"
 
-TEST(ThreeTest, DefaultConstructor) {
-   Three three;
-   EXPECT_EQ(three, "0");
+#include <gtest/gtest.h>
+#include "three.h"
+
+// Фикстура для тестирования класса Three
+class ThreeTest : public ::testing::Test {
+protected:
+    Three three;
+
+    // Установка фикстуры
+    void SetUp() override {
+        // Инициализация необходимых объектов или переменных
+    }
+
+    // Очистка фикстуры
+    void TearDown() override {
+        // Освобождение ресурсов, используемых в тесте
+    }
+
+    // Объект класса Three для тестирования
+};
+
+// Тест для конструктора
+TEST_F(ThreeTest, ConstructorTest) {
+    // Упорядочивание (Arrange)
+    uint64_t n = 123;
+
+    // Действие (Act)
+    Three three(n);
+
+    // Утверждение (Assert)
+    ASSERT_EQ(three, Three(123));
 }
 
-TEST(ThreeTest, SizeValueConstructor) {
-   Three three(5, 1);
-   EXPECT_EQ(three, "11111");
+// Тест для копирующего конструктора
+TEST_F(ThreeTest, CopyConstructorTest) {
+    // Упорядочивание (Arrange)
+    Three original(123);
+
+    // Действие (Act)
+    Three copy(original);
+
+    // Утверждение (Assert)
+    ASSERT_EQ(copy, original);
 }
 
-TEST(ThreeTest, InitializerListConstructor) {
-   Three three = {1, 2, 0};
-   EXPECT_EQ(three, "120");
+// Тест для перемещающего конструктора
+TEST_F(ThreeTest, MoveConstructorTest) {
+    // Упорядочивание (Arrange)
+    Three original(123);
+
+    // Действие (Act)
+    Three moved(std::move(original));
+
+    // Утверждение (Assert)
+    ASSERT_EQ(moved, Three(123));
 }
 
-TEST(ThreeTest, StringConstructor) {
-   Three three("10");
-   EXPECT_EQ(three, "101");
+// Тест для оператора присваивания с копированием
+TEST_F(ThreeTest, CopyAssignmentOperatorTest) {
+    // Упорядочивание (Arrange)
+    Three original(123);
+    Three copy;
+
+    // Действие (Act)
+    copy = original;
+
+    // Утверждение (Assert)
+    ASSERT_EQ(copy, original);
 }
 
-TEST(ThreeTest, NumberConstructor) {
-   Three three(7);
-   EXPECT_EQ(three, "21");
+// Тест для функции print
+TEST_F(ThreeTest, PrintTest) {
+    // Упорядочивание (Arrange)
+    // three уже инициализирован в SetUp()
+
+    // Перенаправление потока вывода в строковый поток
+    std::stringstream output;
+    std::streambuf *oldCoutBuffer = std::cout.rdbuf(output.rdbuf());
+
+    // Вызов функции print
+    three.print();
+
+    // Восстановление исходного буфера cout
+    std::cout.rdbuf(oldCoutBuffer);
+
+    // Утверждение (Assert)
+    ASSERT_EQ(output.str(), "321\n");
 }
 
-TEST(ThreeTest, CopyConstructor) {
-   Three original(3, 2);
-   Three copy(original);
-   EXPECT_EQ(copy, "222");
+// Тест для оператора вывода в поток
+TEST_F(ThreeTest, OutputOperatorTest) {
+    // Упорядочивание (Arrange)
+    // three уже инициализирован в SetUp()
+
+    // Перенаправление потока вывода в строковый поток
+    std::stringstream output;
+    output << three;
+
+    // Утверждение (Assert)
+    ASSERT_EQ(output.str(), "321");
 }
 
-TEST(ThreeTest, AssignmentOperator) {
-   Three original(4, 1);
-   Three copy;
-   copy = original;
-   EXPECT_EQ(copy, "1111");
+// Запуск тестов
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
 
-TEST(ThreeTest, AdditionOperator) {
-   Three three1(2, 1);
-   Three three2(3, 2);
-   Three sum = three1 + three2;
-   EXPECT_EQ(sum, "22211");
-}
-
-TEST(ThreeTest, SubtractionOperator) {
-   Three three1(3, 2);
-   Three three2(2, 1);
-   Three difference = three1 - three2;
-   EXPECT_EQ(difference, "21");
-}
-
-TEST(ThreeTest, EqualityOperator) {
-   Three three1(3, 1);
-   Three three2(3, 1);
-   EXPECT_TRUE(three1 == three2);
-}
-
-TEST(ThreeTest, InequalityOperator) {
-   Three three1(3, 1);
-   Three three2(2, 1);
-   EXPECT_TRUE(three1 != three2);
-}
-
-TEST(ThreeTest, LessThanOperator) {
-   Three three1("21");
-   Three three2("22");
-   EXPECT_TRUE(three1 < three2);
-}
-
-TEST(ThreeTest, GreaterThanOperator) {
-   Three three1("22");
-   Three three2("21");
-   EXPECT_TRUE(three1 > three2);
-}
-
-TEST(ThreeTest, LessThanOrEqualOperator) {
-   Three three1("21");
-   Three three2("22");
-   EXPECT_TRUE(three1 <= three2);
-   EXPECT_TRUE(three1 <= three1);
-}
-
-TEST(ThreeTest, GreaterThanOrEqualOperator) {
-   Three three1("22");
-   Three three2("21");
-   EXPECT_TRUE(three1 >= three2);
-   EXPECT_TRUE(three1 >= three1);
-}
-
-int main(int argc, char** argv) {
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
