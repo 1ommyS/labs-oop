@@ -2,7 +2,7 @@
 
 #include <ostream>
 #include "../src/lab0/Vector.cpp"
-#include "Vector.h"
+#include "vector.h"
 
 class Three {
    friend class ThreeBuilder;

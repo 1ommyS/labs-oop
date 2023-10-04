@@ -1,9 +1,9 @@
 // Copyright 2023 SomeName
 
-#include "Three.h"
+#include "three.h"
 #include <iostream>
 #include "ConditionValidator.h"
-#include "Vector.h"
+#include "vector.h"
 
 const unsigned short ZERO_ASCII_CODE = 48;
 

@@ -1,4 +1,4 @@
-#include "ConditionValidator.h"
+#include "conditionValidator.h"
 #include <iostream>
 
 void CheckCondition(bool condition, const std::string &message) {
