@@ -2,7 +2,7 @@
 
 #include "three.h"
 #include <iostream>
-#include "ConditionValidator.h"
+#include "conditionValidator.h"
 #include "vector.h"
 
 const unsigned short ZERO_ASCII_CODE = 48;

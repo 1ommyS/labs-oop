@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ostream>
-#include "../src/lab0/Vector.cpp"
+#include "../src/lab0/vector.cpp"
 #include "vector.h"
 
 class Three {

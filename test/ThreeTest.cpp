@@ -1,4 +1,4 @@
-#include "Three.h"
+#include "three.h"
 #include "gtest/gtest.h"
 
 TEST(ThreeTest, DefaultConstructor) {
