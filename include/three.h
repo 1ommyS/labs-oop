@@ -1,54 +1,74 @@
 #pragma once
 
 #include <ostream>
-#include "../src/lab0/vector.cpp"
-#include "vector.h"
-
-using namespace std;
+#include "../src/lab0/Vector.cpp"
+#include "Vector.h"
 
 class Three {
-public:
-    Three();
+   friend class ThreeBuilder;
 
-    Three(uint64_t n);
+  public:
+   Three();
 
-    Three(const Three &oth) noexcept;
+   Three(uint64_t n);
 
-    Three(const std::string &str);
+   Three(Vector<unsigned char>);
 
-    Three(Three &&oth) noexcept;
+   Three(const Three &oth) noexcept;
 
-    Three &operator=(Three &&oth) noexcept;
+   Three(const std::string &str);
 
-    Three &operator=(Three oth) {
-        _digits = oth._digits;
-        return *this;
-    }
+   Three(Three &&) noexcept;
 
-    Three &operator++() noexcept;
+   Three &operator=(Three &&) noexcept;
 
-    Three operator++(int) noexcept;
+   Three &operator=(Three oth) noexcept;
 
-    Three &operator--();
+   Three &operator++() noexcept;
 
-    Three operator--(int);
+   Three operator++(int) noexcept;
 
-    Three operator+(const Three &oth) const noexcept;
+   Three &operator--();
 
-    Three operator-(const Three &other) const;
+   Three operator--(int);
 
-    bool operator==(const Three &oth) const;
+   Three operator+(const Three &oth) const noexcept;
 
-    bool operator!=(const Three &oth) const;
+   Three operator-(const Three &other) const;
 
-    bool operator>(const Three &oth) const;
+   bool operator==(const Three &oth) const;
 
-    bool operator<(const Three &oth) const;
+   bool operator!=(const Three &oth) const;
 
-    void print() const;
+   bool operator>(const Three &oth) const;
 
-    friend std::ostream &operator<<(std::ostream &stream, const Three &Three);
+   bool operator<(const Three &oth) const;
 
-private:
-    Vector<unsigned char> _digits;
+   void print() const;
+
+   friend std::ostream &operator<<(std::ostream &stream, const Three &Three);
+
+   class ThreeBuilder {
+     public:
+      ThreeBuilder() = default;
+
+      ThreeBuilder &withDigits(const Vector<unsigned char> &digits) {
+         _digits = digits;
+         return *this;
+      }
+
+      ThreeBuilder &withDigits(uint64_t n) { return *this; }
+
+      ThreeBuilder &withDigits(std::string str) { return *this; }
+
+      Three build() { return Three(_digits); }
+
+     private:
+      Vector<unsigned char> _digits;
+   };
+
+   inline static ThreeBuilder builder() { return ThreeBuilder(); }
+
+  private:
+   Vector<unsigned char> _digits;
 };

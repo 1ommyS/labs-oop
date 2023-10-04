@@ -1,12 +1,9 @@
 #include <iostream>
-#include "three.h"
+#include "Three.h"
 
 using namespace std;
 
 int main() {
-    Three three{122};
-    cout << three << endl;
-    Three three1{101};
-    Three th = three - three1;
-    cout << th << endl;
+   Three three = Three::builder().withDigits("210").build();
+   three.print();
 }
