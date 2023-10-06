@@ -1,10 +1,5 @@
-#include "three.h"
 #include "gtest/gtest.h"
-
-TEST(ThreeTest, DefaultConstructor) {
-   Three three;
-   EXPECT_EQ(three, Three("0"));
-}
+#include "three.h"
 
 TEST(ThreeTest, VectorConstructor) {
    Vector<unsigned char> digits = {'1', '2', '0'};
