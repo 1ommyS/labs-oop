@@ -14,13 +14,13 @@ class Three {
 
    Three(Vector<unsigned char>);
 
+   Three(uint64_t size, char symbol);
+
    Three(const Three &oth) noexcept;
 
    Three(const std::string &str);
 
    Three(Three &&) noexcept;
-
-   Three &operator=(Three &&) noexcept;
 
    Three &operator=(Three oth) noexcept;
 
@@ -47,6 +47,7 @@ class Three {
    void print() const;
 
    friend std::ostream &operator<<(std::ostream &stream, const Three &Three);
+   friend std::istream &operator>>(std::istream &stream, Three &Three);
 
    class ThreeBuilder {
      public:

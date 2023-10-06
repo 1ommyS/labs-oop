@@ -3,6 +3,7 @@
 #include "three.h"
 #include <iostream>
 #include "ConditionValidator.h"
+#include "converters.h"
 #include "vector.h"
 
 const unsigned short ZERO_ASCII_CODE = 48;
@@ -10,6 +11,8 @@ const unsigned short ZERO_ASCII_CODE = 48;
 Three::Three() { _digits.push_back('0'); };
 
 Three::Three(Vector<unsigned char> digits) { _digits = digits; }
+
+Three::Three(uint64_t size, char symbol) { _digits.resize(size, symbol); }
 
 Three::Three(uint64_t n) {
    if (n == 0) {
@@ -40,11 +43,6 @@ Three::Three(const std::string &str) {
 Three::Three(const Three &oth) noexcept { this->_digits = oth._digits; }
 
 Three::Three(Three &&oth) noexcept { this->_digits = std::move(oth._digits); }
-
-Three &Three::operator=(Three &&oth) noexcept {
-   this->_digits = oth._digits;
-   return *this;
-}
 
 Three &Three::operator=(Three oth) noexcept {
    _digits = oth._digits;
@@ -106,22 +104,26 @@ Three Three::operator+(const Three &oth) const noexcept {
    size_t min_size = std::min(_digits.size(), oth._digits.size());
    size_t max_size = std::max(_digits.size(), oth._digits.size());
 
-   Three new_obj{static_cast<uint64_t>(std::pow(10, max_size - 1))};
+   Three new_obj{max_size + 1, '0'};
    new_obj._digits[new_obj._digits.size() - 1] = '0';
 
    for (size_t i = 0; i < min_size; ++i) {
+      int convertedToIntFirstDigit = charToNumber(_digits[i]);
+
+      int convertedToIntSecondDigit = charToNumber(oth._digits[i]);
+
       new_obj._digits[i] +=
-          (_digits[i] + oth._digits[i] - 2 * ZERO_ASCII_CODE) % 3;
-      new_obj._digits[i + 1] +=
-          (_digits[i] + oth._digits[i] - 2 * ZERO_ASCII_CODE + 1) / 3;
+          (convertedToIntFirstDigit + convertedToIntSecondDigit) % 3;
+        new_obj._digits[i + 1] +=
+                (convertedToIntFirstDigit + convertedToIntSecondDigit + 1) / 3;
 
-      if (oth._digits.size() - max_size == 0 &&
-          _digits[_digits.size() - 1] + oth._digits[oth._digits.size() - 1] -
-                  2 * ZERO_ASCII_CODE >
-              2) {
+        if (oth._digits.size() - max_size == 0 &&
+            charToNumber(_digits.getLastElement()) +
+                    charToNumber(oth._digits.getLastElement()) >
+                2) {
 
-         new_obj._digits.resize(new_obj._digits.size() + 1);
-      }
+           new_obj._digits.resize(new_obj._digits.size() + 1);
+        }
    }
 
    return new_obj;
@@ -137,31 +139,31 @@ Three Three::operator-(const Three &other) const {
    size_t i = 0;
    result.reserve(_digits.size());
    while (i < _digits.size()) {
-      int bit1 = (i < _digits.size()) ? _digits[i] - ZERO_ASCII_CODE : 0;
-      int bit2 =
-          (i < other._digits.size()) ? other._digits[i] - ZERO_ASCII_CODE : 0;
+        int bit1 = (i < _digits.size()) ? charToNumber(_digits[i]) : 0;
+        int bit2 =
+            (i < other._digits.size()) ? charToNumber(other._digits[i]) : 0;
 
-      int diff = bit1 - bit2 - carry;
+        int diff = bit1 - bit2 - carry;
 
-      if (diff < 0) {
-         diff += 3;
-         carry = 1;
-      } else {
-         carry = 0;
-      }
+        if (diff < 0) {
+           diff += 3;
+           carry = 1;
+        } else {
+           carry = 0;
+        }
 
-      result.push_back(diff + ZERO_ASCII_CODE);
-      i++;
+        result.push_back(diff + ZERO_ASCII_CODE);
+        i++;
    }
 
    auto last_it = --result.rend();
    int64_t count_zeroes = 0;
    for (auto it = result.rbegin(); it != last_it; ++it) {
-      if (*it == '0') {
-         ++count_zeroes;
-      } else {
-         break;
-      }
+        if (*it == '0') {
+           ++count_zeroes;
+        } else {
+           break;
+        }
    }
 
    result.resize(result.size() - count_zeroes);
@@ -171,34 +173,32 @@ Three Three::operator-(const Three &other) const {
 
 bool Three::operator==(const Three &oth) const {
    if (_digits.size() != oth._digits.size()) {
-      return false;
+        return false;
    }
 
    for (size_t i = 0; i < _digits.size(); ++i) {
-      if (_digits[i] != oth._digits[i]) {
-         return false;
-      }
+        if (_digits[i] != oth._digits[i]) {
+           return false;
+        }
    }
 
    return true;
 }
 
-bool Three::operator!=(const Three &oth) const {
-   return *this == oth ? false : true;
-}
+bool Three::operator!=(const Three &oth) const { return !(*this == oth); }
 
 bool Three::operator>(const Three &oth) const {
    if (oth._digits.size() > _digits.size()) {
-      return false;
+        return false;
    }
 
    for (int64_t i = _digits.size() - 1; i >= 0; --i) {
-      if (_digits[i] > oth._digits[i]) {
-         return true;
+        if (_digits[i] > oth._digits[i]) {
+           return true;
 
-      } else if (_digits[i] < oth._digits[i]) {
-         return false;
-      }
+        } else if (_digits[i] < oth._digits[i]) {
+           return false;
+        }
    }
 
    return false;
@@ -206,20 +206,20 @@ bool Three::operator>(const Three &oth) const {
 
 bool Three::operator<(const Three &oth) const {
    if (oth._digits.size() > _digits.size()) {
-      return true;
+        return true;
    }
 
    for (int64_t i = 0; i < _digits.size(); ++i) {
-      if (_digits[i] > oth._digits[i]) {
-         return false;
-      }
+        if (_digits[i] > oth._digits[i]) {
+           return false;
+        }
    }
    return false;
 }
 
 void Three::print() const {
    for (int64_t i = _digits.size() - 1; i >= 0; --i) {
-      std::cout << _digits[i];
+        std::cout << _digits[i];
    }
 
    std::cout << std::endl;
@@ -227,8 +227,14 @@ void Three::print() const {
 
 std::ostream &operator<<(std::ostream &stream, const Three &three) {
    for (int64_t i = three._digits.size() - 1; i >= 0; --i) {
-      stream << three._digits[i];
+        stream << three._digits[i];
    }
 
+   return stream;
+}
+std::istream &operator >>(std::istream &stream, Three &three) {
+   std::string buffer;
+   stream >> buffer;
+   three = Three(buffer);
    return stream;
 }

@@ -208,6 +208,11 @@ bool Vector<T>::operator==(const Vector<T> &otherVector) const {
 }
 
 template <typename T>
+T Vector<T>::getLastElement() const {
+   return this->Array[arraySize - 1];
+}
+
+template <typename T>
 bool Vector<T>::operator!=(const Vector<T> &otherVector) const {
    return !this->operator==(otherVector);
 }

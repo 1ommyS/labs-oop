@@ -47,6 +47,8 @@ class Vector {
 
    void clear();
 
+   T getLastElement() const;
+
    bool operator==(const Vector<T> &) const;
 
    bool operator!=(const Vector<T> &) const;
