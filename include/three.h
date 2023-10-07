@@ -72,4 +72,6 @@ class Three {
 
   private:
    Vector<unsigned char> _digits;
+   void sumArray(Three& newObj, const Three& oth, int ost);
+
 };
