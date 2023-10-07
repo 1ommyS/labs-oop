@@ -4,61 +4,64 @@
 #include <iostream>
 #include <memory>
 
-template <typename T>
+template<typename T>
 class Vector {
-  public:
-   Vector();
+public:
+    Vector();
 
-   Vector(const size_t, const T & = T());
+    Vector(const size_t, const T & = T());
 
-   Vector(const Vector<T> &);
+    Vector(const Vector<T> &);
 
-   Vector(const std::initializer_list<T> &);
-   Vector<T>(Vector<T> &&oth) noexcept;
+    Vector(const std::initializer_list<T> &);
 
-   Vector<T> &operator=(const Vector<T> &);
+    Vector<T>(Vector<T> &&oth) noexcept;
 
-   void reserve(const size_t);
+    Vector<T> &operator=(const Vector<T> &);
 
-   void resize(const size_t, const T & = T());
+    void reserve(const size_t);
 
-   void push_back(const T &);
+    void resize(const size_t, const T & = T());
 
-   template <typename... Args>
-   void emplace_back(const Args &...);
+    void push_back(const T &);
 
-   void pop_back();
+    template<typename... Args>
+    void emplace_back(const Args &...);
 
-   T &at(const size_t) const;
+    void pop_back();
 
-   T &operator[](const size_t) const;
+    T &at(const size_t) const;
 
-   T &front() const;
+    T &operator[](const size_t) const;
 
-   T &back() const;
+    T &front() const;
 
-   bool empty() const;
+    T &back() const;
 
-   size_t size() const;
+    bool empty() const;
 
-   size_t capacity() const;
+    size_t size() const;
 
-   void shrink_to_fit();
+    void setSize(int);
 
-   void clear();
+    size_t capacity() const;
 
-   T getLastElement() const;
+    void shrink_to_fit();
 
-   bool operator==(const Vector<T> &) const;
+    void clear();
 
-   bool operator!=(const Vector<T> &) const;
+    T getLastElement() const;
 
-   ~Vector();
+    bool operator==(const Vector<T> &) const;
 
-  private:
-   size_t arraySize;
-   size_t arrayCapacity;
-   T *Array;
+    bool operator!=(const Vector<T> &) const;
+
+    ~Vector();
+
+private:
+    size_t arraySize;
+    size_t arrayCapacity;
+    T *Array;
 };
 
 #endif

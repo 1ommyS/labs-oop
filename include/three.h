@@ -32,9 +32,9 @@ class Three {
 
    Three operator--(int);
 
-   Three operator+(const Three &oth) const noexcept;
+   Three operator+(const Three &oth) noexcept;
 
-   Three operator-(const Three &other) const;
+   Three operator-(const Three &other);
 
    bool operator==(const Three &oth) const;
 

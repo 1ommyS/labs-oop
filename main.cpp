@@ -1,9 +1,14 @@
 #include <iostream>
+#include "converters.h"
 #include "three.h"
 
 using namespace std;
 
 int main() {
-   Three three = Three::builder().withDigits(210).build();
-   three.print();
+
+    Three three1 = Three(110);
+    Three three2 = Three(102);
+    Three result = three1 + three2;
+    cout << result << endl;
+    return 0;
 }
