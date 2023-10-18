@@ -9,16 +9,18 @@
 #include "BaseFigure.hpp"
 
 class Trapezoid : public BaseFigure {
-public:
-    explicit Trapezoid(Vector<std::pair<double, double>> points);
 
-    friend std::ostream &operator<<(std::ostream &os, const Trapezoid &trapezoid);
+  public:
+   explicit Trapezoid(Vector<std::pair<double, double>> points);
 
-    [[nodiscard]] pair<double, double> CalculateCenter() const override;
+   friend std::ostream &operator<<(std::ostream &os,
+                                   const Trapezoid &trapezoid);
 
-    explicit operator double() const override;
+   [[nodiscard]] pair<double, double> CalculateCenter() const override;
 
+   explicit operator double() const override;
+
+   static Trapezoid CreateInstance(Vector<pair<double, double>>);
 };
 
-
-#endif //LAB0_TRAPEZOID_H
+#endif  // LAB0_TRAPEZOID_H

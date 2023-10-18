@@ -6,17 +6,23 @@
 using std::pair;
 
 class BaseFigure {
-protected:
-    Vector<pair<double, double>> _points;
+  protected:
+   Vector<pair<double, double>> _points;
 
-public:
-    BaseFigure() = default;
+  public:
+   BaseFigure() = default;
 
-    virtual pair<double, double> CalculateCenter() const;
+   virtual pair<double, double> CalculateCenter() const;
 
-    virtual explicit operator double() const = 0;
+   virtual explicit operator double() const = 0;
 
-    friend std::ostream &operator<<(std::ostream &os, const BaseFigure &figure);
+   virtual ~BaseFigure();
 
-    friend std::istream &operator>>(std::istream &is, BaseFigure &figure);
+   static BaseFigure CreateInstance(Vector<pair<double, double>>);
+
+   friend std::ostream &operator<<(std::ostream &os, const BaseFigure &figure);
+
+   friend std::istream &operator>>(std::istream &is, BaseFigure &figure);
+
+   static BaseFigure CreateInstance(Vector<pair<double, double>>);
 };

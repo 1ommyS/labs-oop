@@ -5,16 +5,13 @@
 #ifndef LAB0_IFIGUREVALIDATOR_H
 #define LAB0_IFIGUREVALIDATOR_H
 
-
 #include "figures/BaseFigure.hpp"
 
+using std::pair;
+
 class IFigureValidator {
-    virtual void Validate(BaseFigure figure);
-
-protected:
-    Vector<IFigureValidator> validators;
-
+  public:
+   virtual void Validate(Vector<pair<double, double>> points) = 0;
 };
 
-
-#endif //LAB0_IFIGUREVALIDATOR_H
+#endif  // LAB0_IFIGUREVALIDATOR_H

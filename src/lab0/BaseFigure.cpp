@@ -1,2 +1,4 @@
-#include "figure.hpp"
+#include "figures/BaseFigure.hpp"
+
+using std::pair;
 
