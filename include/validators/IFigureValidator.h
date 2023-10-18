@@ -10,8 +10,10 @@
 using std::pair;
 
 class IFigureValidator {
-  public:
-   virtual void Validate(Vector<pair<double, double>> points) = 0;
+protected:
+    Vector<IFigureValidator> _validators;
+public:
+    virtual void Validate(Vector <pair<double, double>> points) = 0;
 };
 
 #endif  // LAB0_IFIGUREVALIDATOR_H
