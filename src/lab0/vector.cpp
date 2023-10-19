@@ -1,5 +1,4 @@
-#include "vector.h"
-#include <exception>
+#include "vector.hpp"
 #include <iostream>
 
 template<typename T>
@@ -8,6 +7,7 @@ Vector<T>::Vector() {
     this->arraySize = 0;
     this->arrayCapacity = 1;
 }
+
 
 template<typename T>
 Vector<T>::Vector(const size_t startSize, const T &value) : Vector() {
