@@ -13,7 +13,7 @@ public:
 
     [[nodiscard]] Point CalculateCenter() const override;
 
-    explicit operator double() const override;
+    double CalculateArea() const override;
 
     static Pentagon CreateInstance(Vector <Point> points) {
         return Pentagon(points);

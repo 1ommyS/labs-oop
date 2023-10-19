@@ -16,8 +16,8 @@ public:
     BaseFigure() = default;
 
     virtual Point CalculateCenter() const;
+    virtual double CalculateArea() const;
 
-    virtual explicit operator double() const = 0;
 
     ~BaseFigure() = default;
 };

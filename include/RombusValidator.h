@@ -5,7 +5,7 @@
 
 class RombusValidator : public IFigureValidator {
 public:
-    void Validate(const std::type_info &type, Vector<Point> points) {
+    void Validate(Vector<Point> points) {
         if (points.size() != 4) {
             throw std::invalid_argument("Invalid number of points");
         }

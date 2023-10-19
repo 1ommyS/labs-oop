@@ -16,7 +16,7 @@ public:
 
     Point CalculateCenter() const override;
 
-    explicit operator double() const override;
+    double CalculateArea() const override;
 
     static Rombus CreateInstance(Vector<Point> points) {
         return Rombus(points);

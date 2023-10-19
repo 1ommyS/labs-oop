@@ -20,12 +20,13 @@ public:
             auto currentValidator = FigureValidator::_validators[i];
 
             if (currentValidator.IsAllowedFor(type)) {
-                currentValidator.Validate(type, points);
+                currentValidator.Validate(points);
             }
         }
     }
 
 };
+
 
 Vector<IFigureValidator> FigureValidator::_validators = {
         TrapezoidValidator(), RombusValidator(), PentagonValidator()};

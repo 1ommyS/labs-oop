@@ -12,8 +12,7 @@ public:
     /// точка в правом верхнем углу
     /// @param points
     /// @throw std::invalid_argument
-    void Validate(const std::type_info &type,
-                  Vector<Point> points) {
+    void Validate(Vector<Point> points) {
         if (points.size() != 4) {
             throw std::invalid_argument("Invalid number of points");
         }

@@ -12,6 +12,8 @@ class IFigureValidator {
 public:
     void Validate(const std::type_info &type, Vector<Point> points);
 
+    void Validate(Vector<Point> points);
+
     bool IsAllowedFor(const std::type_info &type);
 };
 

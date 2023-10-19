@@ -17,8 +17,6 @@ protected:
 
 public:
     explicit Trapezoid(Vector<Point> &points) {
-        FigureValidator::Validate(typeid(Trapezoid), points);
-
         _points = points;
     }
 
@@ -55,7 +53,7 @@ public:
         return *center;
     }
 
-    explicit operator double() const override {
+    double CalculateArea() const override {
         // Расчет площади трапеции
         double base1 = std::abs(_points[1].x - _points[0].x);
         double base2 = std::abs(_points[3].x - _points[2].x);
@@ -67,6 +65,8 @@ public:
     }
 
     static Trapezoid CreateInstance(Vector<Point> &points) {
+        FigureValidator::Validate(typeid(Trapezoid), points);
+
         return Trapezoid(points);
     }
 
