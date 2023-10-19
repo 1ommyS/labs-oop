@@ -70,6 +70,5 @@ public:
         return Trapezoid(points);
     }
 
-
 };
 
