@@ -29,6 +29,9 @@ public:
 
 
 Vector<IFigureValidator> FigureValidator::_validators = {
-        TrapezoidValidator(), RombusValidator(), PentagonValidator()};
+        TrapezoidValidator(),
+        RombusValidator(),
+        PentagonValidator()
+};
 
 #endif  // LABS_OOP_FIGUREVALIDATOR_H

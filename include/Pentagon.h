@@ -1,8 +1,8 @@
 #pragma once
 
 #include <ostream>
-#include "BaseFigure.hpp"
-#include "FigureValidator.h"
+#include "./BaseFigure.hpp"
+#include "./FigureValidator.h"
 #include "vector.hpp"
 
 class Pentagon : public BaseFigure {

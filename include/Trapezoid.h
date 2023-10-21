@@ -7,84 +7,87 @@
 #include <iostream>
 #include <ostream>
 #include <utility>
-#include "BaseFigure.hpp"
-#include "FigureValidator.h"
+#include "../include/BaseFigure.hpp"
+#include "../include/FigureValidator.h"
 #include "vector.hpp"
 
 class Trapezoid : public BaseFigure {
-  protected:
-   Vector<Point> _points;
+protected:
+    Vector<Point> _points;
 
-  public:
-   Trapezoid() = default;
-   explicit Trapezoid(Vector<Point> &points) { _points = points; }
+public:
+    Trapezoid() = default;
 
-   friend std::ostream &operator<<(std::ostream &os,
-                                   const Trapezoid &trapezoid) {
-      for (int i = 0; i < trapezoid._points.size(); i++) {
-         os << "(" << trapezoid._points[i].x << "," << trapezoid._points[i].y
-            << ")";
-      }
-      return os;
-   }
+    explicit Trapezoid(Vector<Point> &points) { _points = points; }
 
-   Vector<Point> GetPoints() { return _points; }
+    friend std::ostream &operator<<(std::ostream &os,
+                                    const Trapezoid &trapezoid) {
+        for (int i = 0; i < trapezoid._points.size(); i++) {
+            os << "(" << trapezoid._points[i].x << "," << trapezoid._points[i].y
+               << ")";
+        }
+        return os;
+    }
 
-   BaseFigure &operator=(BaseFigure &other) override {
-      _points = other.GetPoints();
-      return *this;
-   }
+    Vector<Point> GetPoints() { return _points; }
 
-   BaseFigure &operator=(BaseFigure &&other) override {
-      _points = std::move(other.GetPoints());
-      return *this;
-   };
-   bool operator==(BaseFigure &other) override {
-      if (*this == other) {
-         return true;
-      }
+    BaseFigure &operator=(BaseFigure &other) override {
+        _points = other.GetPoints();
+        return *this;
+    }
 
-      if (typeid(Pentagon) != typeid(other)) {
-         return false;
-      }
+    BaseFigure &operator=(BaseFigure &&other) override {
+        _points = std::move(other.GetPoints());
+        return *this;
+    };
 
-      return _points == other.GetPoints();
-   }
-   Point CalculateCenter() const override {
-      double xSum = 0.0;
-      double ySum = 0.0;
+    bool operator==(BaseFigure &other) override {
+        if (*this == other) {
+            return true;
+        }
 
-      // Суммируем координаты всех вершин
-      for (size_t i = 0; i < _points.size(); i++) {
-         Point point = _points[i];
+        if (typeid(Pentagon) != typeid(other)) {
+            return false;
+        }
 
-         xSum += point.x;
-         ySum += point.y;
-      }
+        return _points == other.GetPoints();
+    }
 
-      // Вычисляем среднее значение координат
-      double centerX = xSum / _points.size();
-      double centerY = ySum / _points.size();
+    Point CalculateCenter() const override {
+        double xSum = 0.0;
+        double ySum = 0.0;
 
-      // Создаем новую точку, представляющую центр трапеции
-      auto *center = new Point(centerX, centerY);
-      return *center;
-   }
+        // Суммируем координаты всех вершин
+        for (size_t i = 0; i < _points.size(); i++) {
+            Point point = _points[i];
 
-   double CalculateArea() const override {
-      // Расчет площади трапеции
-      double base1 = std::abs(_points[1].x - _points[0].x);
-      double base2 = std::abs(_points[3].x - _points[2].x);
-      double height = std::abs(_points[0].y - _points[2].y);
+            xSum += point.x;
+            ySum += point.y;
+        }
 
-      double area = (base1 + base2) * height / 2.0;
+        // Вычисляем среднее значение координат
+        double centerX = xSum / _points.size();
+        double centerY = ySum / _points.size();
 
-      return area;
-   }
+        // Создаем новую точку, представляющую центр трапеции
+        auto *center = new Point(centerX, centerY);
+        return *center;
+    }
 
-   static Trapezoid CreateInstance(Vector<Point> &points) {
-      FigureValidator::Validate(typeid(Trapezoid), points);
+    double CalculateArea() const override {
+        // Расчет площади трапеции
+        double base1 = std::abs(_points[1].x - _points[0].x);
+        double base2 = std::abs(_points[3].x - _points[2].x);
+        double height = std::abs(_points[0].y - _points[2].y);
 
-      return Trapezoid(points);
-   }
+        double area = (base1 + base2) * height / 2.0;
+
+        return area;
+    }
+
+    static Trapezoid CreateInstance(Vector<Point> &points) {
+        FigureValidator::Validate(typeid(Trapezoid), points);
+
+        return Trapezoid(points);
+    }
 };
