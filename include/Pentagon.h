@@ -2,74 +2,92 @@
 
 #include <ostream>
 #include "BaseFigure.hpp"
-#include "vector.hpp"
 #include "FigureValidator.h"
+#include "vector.hpp"
 
 class Pentagon : public BaseFigure {
-protected:
-    Vector<Point> _points;
+  protected:
+   Vector<Point> _points;
 
-public:
-    explicit Pentagon(Vector<Point> points) {
-        _points = points;
-    }
+  public:
+   explicit Pentagon(Vector<Point> points) { _points = points; }
 
-    friend std::ostream &operator<<(std::ostream &os, const Pentagon &pentagon) {
-        for (int i = 0; i < pentagon._points.size(); i++) {
-            os << "(" << pentagon._points[i].x << "," << pentagon._points[i].y << ")";
-        }
-        return os;
-    }
+   friend std::ostream &operator<<(std::ostream &os, const Pentagon &pentagon) {
+      for (int i = 0; i < pentagon._points.size(); i++) {
+         os << "(" << pentagon._points[i].x << "," << pentagon._points[i].y
+            << ")";
+      }
+      return os;
+   }
 
-    Vector<Point> GetPoints() {
-        return _points;
-    }
+   Vector<Point> GetPoints() { return _points; }
 
-    [[nodiscard]] Point CalculateCenter() const override {
-        double xSum = 0.0;
-        double ySum = 0.0;
+   [[nodiscard]] Point CalculateCenter() const override {
+      double xSum = 0.0;
+      double ySum = 0.0;
 
-        // Суммируем координаты всех вершин
-        for (size_t i = 0; i < _points.size(); i++) {
-            Point point = _points[i];
+      // Суммируем координаты всех вершин
+      for (size_t i = 0; i < _points.size(); i++) {
+         Point point = _points[i];
 
-            xSum += point.x;
-            ySum += point.y;
-        }
+         xSum += point.x;
+         ySum += point.y;
+      }
 
-        // Вычисляем среднее значение координат
-        double centerX = xSum / _points.size();
-        double centerY = ySum / _points.size();
+      // Вычисляем среднее значение координат
+      double centerX = xSum / _points.size();
+      double centerY = ySum / _points.size();
 
-        // Создаем новую точку, представляющую центр трапеции
-        auto *center = new Point(centerX, centerY);
-        return *center;
-    }
+      // Создаем новую точку, представляющую центр трапеции
+      auto *center = new Point(centerX, centerY);
+      return *center;
+   }
 
-    double CalculateArea() const override {
-        // Разбиваем пятиугольник на треугольники
-        // и суммируем площади каждого треугольника
+   BaseFigure &operator=(BaseFigure &other) override {
+      _points = other.GetPoints();
+      return *this;
+   }
 
-        double area = 0.0;
+   BaseFigure &operator=(BaseFigure &&other) override {
+      _points = std::move(other.GetPoints());
+      return *this;
+   };
+   bool operator==(BaseFigure &other) override {
+      if (*this == other) {
+         return true;
+      }
 
-        // Используем формулу Гаусса для расчета площади треугольника
-        for (size_t i = 0; i < _points.size() - 2; i++) {
-            const Point &p1 = _points[0];
-            const Point &p2 = _points[i + 1];
-            const Point &p3 = _points[i + 2];
+      if (typeid(Pentagon) != typeid(other)) {
+         return false;
+      }
 
-            double triangleArea = 0.5 * std::abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)));
-            area += triangleArea;
-        }
+      return _points == other.GetPoints();
+   }
 
-        return area;
-    }
+   double CalculateArea() const override {
+      // Разбиваем пятиугольник на треугольники
+      // и суммируем площади каждого треугольника
 
-    static Pentagon CreateInstance(Vector<Point> points) {
-        FigureValidator::Validate(typeid(Pentagon), points);
+      double area = 0.0;
 
-        return Pentagon(points);
-    }
+      // Используем формулу Гаусса для расчета площади треугольника
+      for (size_t i = 0; i < _points.size() - 2; i++) {
+         const Point &p1 = _points[0];
+         const Point &p2 = _points[i + 1];
+         const Point &p3 = _points[i + 2];
+
+         double triangleArea =
+             0.5 * std::abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) +
+                             p3.x * (p1.y - p2.y)));
+         area += triangleArea;
+      }
+
+      return area;
+   }
+
+   static Pentagon CreateInstance(Vector<Point> points) {
+      FigureValidator::Validate(typeid(Pentagon), points);
+
+      return Pentagon(points);
+   }
 };
-
-

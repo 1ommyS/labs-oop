@@ -3,6 +3,7 @@
 
 #include "IFigureValidator.h"
 #include "Trapezoid.h"
+#include <typeinfo>
 
 class TrapezoidValidator : public IFigureValidator {
 public:
@@ -12,7 +13,7 @@ public:
     /// точка в правом верхнем углу
     /// @param points
     /// @throw std::invalid_argument
-    void Validate(Vector<Point> points) {
+    void Validate(Vector<Point> points) override {
         if (points.size() != 4) {
             throw std::invalid_argument("Invalid number of points");
         }
@@ -31,8 +32,9 @@ public:
         }
     }
 
-    bool IsAllowedFor(const std::type_info &type) {
-        return typeid(Trapezoid) == type;
+    bool IsAllowedFor(const std::type_info &type) override{
+        Trapezoid t;
+        return typeid(decltype(Trapezoid())) == type;
     }
 };
 
