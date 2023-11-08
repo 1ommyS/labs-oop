@@ -1,93 +1,46 @@
 #pragma once
+#include "Figure.h"
+#include "NumberConcept.h"
 
-#include <ostream>
-#include "./BaseFigure.hpp"
-#include "./FigureValidator.h"
-#include "vector.hpp"
-
-class Pentagon : public BaseFigure {
-  protected:
-   Vector<Point> _points;
+template <Number T>
+class Pentagon : public Figure<T> {
+   template <Number U>
+   friend std::ostream& operator<<(std::ostream& os, const Pentagon<U>& figure);
+   template <Number U>
+   friend std::istream& operator>>(std::istream& is, Pentagon<U>& figure);
 
   public:
-   explicit Pentagon(Vector<Point> points) { _points = points; }
+   Pentagon();
+   Pentagon(const std::shared_ptr<Point<T>> points);
+   Pentagon(const Pentagon<T>& other);
+   Pentagon(Pentagon<T>&& other);
 
-   friend std::ostream &operator<<(std::ostream &os, const Pentagon &pentagon) {
-      for (int i = 0; i < pentagon._points.size(); i++) {
-         os << "(" << pentagon._points[i].x << "," << pentagon._points[i].y
-            << ")";
-      }
-      return os;
-   }
+   virtual ~Pentagon() = default;
 
-   Vector<Point> GetPoints() { return _points; }
+   // std::string getFigureName() const;
+   // Point* getPoints() const;
+   static Pentagon<T> create(const std::shared_ptr<Point<T>> points);
 
-   [[nodiscard]] Point CalculateCenter() const override {
-      double xSum = 0.0;
-      double ySum = 0.0;
+   virtual std::ostream& print(std::ostream& os) const override;
+   virtual std::istream& read(std::istream& is) override;
 
-      // Суммируем координаты всех вершин
-      for (size_t i = 0; i < _points.size(); i++) {
-         Point point = _points[i];
+   virtual operator double() const override;
+   virtual Point<T> center() const override;
 
-         xSum += point.x;
-         ySum += point.y;
-      }
+   Pentagon<T>& operator=(Pentagon<T>& other);
+   Pentagon<T>& operator=(Pentagon<T>&& other);
+   bool operator==(Pentagon<T>& other);
 
-      // Вычисляем среднее значение координат
-      double centerX = xSum / _points.size();
-      double centerY = ySum / _points.size();
+   virtual Figure<T>& operator=(const Figure<T>&& other) override;
+   virtual Figure<T>& operator=(const Figure<T>& other) override;
+   virtual bool operator==(const Figure<T>& other) override;
 
-      // Создаем новую точку, представляющую центр трапеции
-      auto *center = new Point(centerX, centerY);
-      return *center;
-   }
-
-   BaseFigure &operator=(BaseFigure &other) override {
-      _points = other.GetPoints();
-      return *this;
-   }
-
-   BaseFigure &operator=(BaseFigure &&other) override {
-      _points = std::move(other.GetPoints());
-      return *this;
-   };
-   bool operator==(BaseFigure &other) override {
-      if (*this == other) {
-         return true;
-      }
-
-      if (typeid(Pentagon) != typeid(other)) {
-         return false;
-      }
-
-      return _points == other.GetPoints();
-   }
-
-   double CalculateArea() const override {
-      // Разбиваем пятиугольник на треугольники
-      // и суммируем площади каждого треугольника
-
-      double area = 0.0;
-
-      // Используем формулу Гаусса для расчета площади треугольника
-      for (size_t i = 0; i < _points.size() - 2; i++) {
-         const Point &p1 = _points[0];
-         const Point &p2 = _points[i + 1];
-         const Point &p3 = _points[i + 2];
-
-         double triangleArea =
-             0.5 * std::abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) +
-                             p3.x * (p1.y - p2.y)));
-         area += triangleArea;
-      }
-
-      return area;
-   }
-
-   static Pentagon CreateInstance(Vector<Point> points) {
-      FigureValidator::Validate(typeid(Pentagon), points);
-
-      return Pentagon(points);
-   }
+  private:
+   // std::string figureName = "Pentagon";
+   void fillPoints(const int pointsAmount, Point<T>* res,
+                   const Point<T>* data) override;
 };
+template <Number T>
+std::ostream& operator<<(std::ostream& os, const Pentagon<T>& figure);
+template <Number T>
+std::istream& operator>>(std::istream& is, Pentagon<T>& figure);
