@@ -2,17 +2,17 @@
 #include <memory>
 #include <vector>
 #include "Figure.h"
-#include "NumberConcept.h"
-template <Number T>
-class FigureList {
+#include "FigureConcept.h"
+template <Figure T>
+class List {
   private:
    int size;
    int capacity;
    T* figures;
 
   public:
-   FigureList();
-   ~FigureList();
+   List();
+   ~List();
    void resize();
    void push_back(T figure);
    void remove(int index);

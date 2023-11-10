@@ -2,7 +2,6 @@
 #include "Figure.h"
 #include "Romb.h"
 
-const int AMOUNT_OF_POINTS = 4;
 const double EPS = 1e-9;
 
 template <class T>
@@ -17,14 +16,14 @@ bool RombValidator<T>::isAllowed(const Figure<T>& fugure) const {
 
 template <class T>
 void RombValidator<T>::validate(const Figure<T>& figure) const {
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < points.get().size(); i++) {
       if (abs(figure.getPoints().get()[(i + 1) % AMOUNT_OF_POINTS] -
               figure.getPoints().get()[i]) <= EPS) {
          throw std::invalid_argument("The side with 0 length found(");
       }
    }
 
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < points.get().size(); i++) {
       if (isParalel(figure.getPoints().get()[(i + 1) % AMOUNT_OF_POINTS] -
                         figure.getPoints().get()[i],
                     figure.getPoints().get()[(i + 2) % AMOUNT_OF_POINTS] -

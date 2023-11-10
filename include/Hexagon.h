@@ -3,19 +3,19 @@
 #include "NumberConcept.h"
 
 template <Number T>
-class Six : public Figure<T> {
+class Hexagon : public Figure<T> {
    template <Number U>
-   friend std::ostream& operator<<(std::ostream& os, const Six<U>& figure);
+   friend std::ostream& operator<<(std::ostream& os, const Hexagon<U>& figure);
    template <Number U>
-   friend std::istream& operator>>(std::istream& is, Six<U>& figure);
+   friend std::istream& operator>>(std::istream& is, Hexagon<U>& figure);
 
   public:
-   Six();
-   Six(const std::shared_ptr<Point<T>> points);
-   Six(const Six<T>& other);
-   Six(Six<T>&& other);
+   Hexagon();
+   Hexagon(const std::shared_ptr<Point<T>> points);
+   Hexagon(const Hexagon<T>& other);
+   Hexagon(Hexagon<T>&& other);
 
-   virtual ~Six() = default;
+   virtual ~Hexagon() = default;
 
    virtual std::ostream& print(std::ostream& os) const override;
    virtual std::istream& read(std::istream& is) override;
@@ -23,9 +23,9 @@ class Six : public Figure<T> {
    virtual operator double() const override;
    virtual Point<T> center() const override;
 
-   Six<T>& operator=(const Six<T>& other);
-   Six<T>& operator=(Six<T>&& other);
-   bool operator==(Six<T>& other);
+   Hexagon<T>& operator=(const Hexagon<T>& other);
+   Hexagon<T>& operator=(Hexagon<T>&& other);
+   bool operator==(Hexagon<T>& other);
 
    virtual Figure<T>& operator=(const Figure<T>&& other) override;
    virtual Figure<T>& operator=(const Figure<T>& other) override;
@@ -36,6 +36,6 @@ class Six : public Figure<T> {
                            const Point<T>* data) override;
 };
 template <Number T>
-std::ostream& operator<<(std::ostream& os, const Six<T>& figure);
+std::ostream& operator<<(std::ostream& os, const Hexagon<T>& figure);
 template <Number T>
-std::istream& operator>>(std::istream& is, Six<T>& figure);
+std::istream& operator>>(std::istream& is, Hexagon<T>& figure);

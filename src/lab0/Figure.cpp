@@ -18,6 +18,14 @@ Figure<T>::Figure() {
 }
 
 template <Number T>
+std::ostream& Figure<T>::print(std::ostream& os) {
+   for (int i = 0; i < points.get().size(); ++i) {
+      os << points.get()[i] << std::endl;
+   }
+   return os;
+}
+
+template <Number T>
 std::shared_ptr<Point<T>> Figure<T>::getPoints() const {
    return this->points;
 }
