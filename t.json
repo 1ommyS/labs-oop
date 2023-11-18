@@ -1,0 +1,216 @@
+{
+  //Main editor settings
+  "window.openFilesInNewWindow": "off",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "bounded",
+  "editor.wrappingIndent": "same",
+  "editor.wordWrapColumn": 80,
+  "editor.folding": false,
+  "editor.insertSpaces": false,
+  "editor.smoothScrolling": true,
+  "editor.detectIndentation": true,
+  "editor.suggestSelection": "first",
+  //Определяет, будет ли редактор прокручиваться за пределы последней строки.
+  "editor.scrollBeyondLastLine": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  // Rename tags
+  "editor.linkedEditing": true,
+  // Auto closing tags
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "typescript.autoClosingTags": true,
+  //Управляет выделением символов, которые можно спутать с основными символами ASCII, кроме тех, которые являются общими для текущего пользовательского языкового стандарта.
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.quickSuggestionsDelay": 0,
+
+  //Appearance
+  "editor.bracketPairColorization.enabled": false,
+  "editor.glyphMargin": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.colorCustomizations": {
+    "editorOverviewRuler.errorForeground": "#0000",
+    "editorOverviewRuler.warningForeground": "#0000",
+    "editorOverviewRuler.infoForeground": "#0000"
+  },
+  "workbench.productIconTheme": "fluent-icons",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 31,
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "JetBrains Mono, Ubuntu Mono, monoki, Maple Mono, Hasklig, PragmataPro, IBM Plex Mono, Iosevka, Victor Mono, MonoLisa, Roboto Mono, Fira Code, DejaVu Sans Mono, monospace",
+  "editor.inlayHints.fontFamily": "PragmataPro",
+
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italic
+          "comment",
+          "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          "constant", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js" //class keyword
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          //following will be excluded from italics (VSCode has some defaults for italics)
+          "invalid",
+          "keyword.operator",
+          "constant.numeric.css",
+          "keyword.other.unit.px.css",
+          "constant.numeric.decimal.js",
+          "constant.numeric.json"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+
+  //Terminal
+  "terminal.integrated.fontFamily": "Iosevka",
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.tabs.enabled": true,
+
+  //Explorer
+  "explorer.confirmDelete": false,
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "emmet.includeLanguages": {
+    "blade": "html",
+    "javascript": "javascriptreact"
+  },
+  //Разрешить уменьшение размера вкладок, когда доступного места недостаточно для отображения всех вкладок одновременно.
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.startupEditor": "newUntitledFile",
+
+  //Debug
+  "debug.toolBarLocation": "hidden",
+  "debug.focusWindowOnBreak": false,
+  "debug.showInlineBreakpointCandidates": false,
+  "debug.showBreakpointsInOverviewRuler": false,
+
+  //Format
+  "prettier.semi": true,
+  "prettier.useTabs": true,
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  //Включите круглые скобки вокруг единственного параметра функции стрелки
+  "prettier.arrowParens": "avoid",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.packageManager": "yarn",
+  // "files.associations": { "*.scss": "postcss", "*.module.scss": "postcss" },
+  "editor.inlineSuggest.enabled": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+
+  //Laravel
+  "blade.format.enable": true,
+  "files.defaultLanguage": "plaintext",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "html.completion.attributeDefaultValue": "singlequotes",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+
+  //Breadcrumbs
+  "breadcrumbs.icons": false,
+  "breadcrumbs.showKeys": false,
+  "breadcrumbs.showFiles": false,
+  "breadcrumbs.symbolPath": "off",
+  "breadcrumbs.showArrays": false,
+  "breadcrumbs.showEvents": false,
+  "breadcrumbs.showFields": false,
+  "breadcrumbs.showClasses": false,
+  "breadcrumbs.showMethods": false,
+  "breadcrumbs.showBooleans": false,
+  "breadcrumbs.showFunctions": false,
+  "breadcrumbs.showConstants": false,
+  "breadcrumbs.showEnumMembers": false,
+  "breadcrumbs.showConstructors": false,
+
+  //JS & TS
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.format.semicolons": "remove",
+  "typescript.format.semicolons": "remove",
+
+  //Spell checker
+  "cSpell.language": "en,ru",
+  "cSpell.enabled": true,
+  "cSpell.enableFiletypes": [
+    "blade",
+    "jsx",
+    "tsx",
+    "ts",
+    "js",
+    "scss",
+    "sass",
+    "vue"
+  ],
+
+  "editor.unicodeHighlight.allowedCharacters": {
+    "а": true,
+    "с": true,
+    "Т": true,
+    "б": true,
+    "е": true
+  },
+  "editor.hideCursorInOverviewRuler": true,
+  "git.enableSmartCommit": true,
+
+  "files.exclude": {
+    "**/.expo": true,
+    "**/.expo-shared": true,
+    "**/.idea": true,
+    "**/.next": true,
+    "**/dist": true
+  },
+  "[blade]": {
+    "editor.defaultFormatter": "onecentlin.laravel-blade"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+  },
+  "window.confirmBeforeClose": "keyboardOnly",
+  "emmet.triggerExpansionOnTab": true,
+  "git.openRepositoryInParentFolders": "never",
+  "editor.cursorBlinking": "expand",
+  "editor.cursorStyle": "line-thin",
+  "editor.cursorSmoothCaretAnimation": "explicit",
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
+  "symbols.hidesExplorerArrows": false,
+  "workbench.iconTheme": "helium-icon-theme",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "color-picker.languages": ["javascript", "typescript"],
+  "editor.accessibilitySupport": "off",
+  "settingsSync.ignoredExtensions": ["arickho.matey-vscode"],
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "window.zoomLevel": 1,
+  "workbench.editor.empty.hint": "hidden",
+  "window.density.editorTabHeight": "compact",
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "workbench.colorTheme": "Xcode Default (Dark)",
+  "editor.minimap.enabled": false,
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  }
+}

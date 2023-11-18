@@ -1,32 +1,33 @@
 #include <gtest/gtest.h>
-#include <vector>
-#include "allocator.h"
+#include <type_traits>
+#include "allocator.hpp"
 
-TEST(MyAllocatorTest, AllocateAndDeallocate) {
-   using MyIntAllocator = MyAllocator<int>;
+TEST(AllocatorTestSet, InnerTypesIsConvertible) {
+   bool p2constP = std::is_convertible_v<MAI::Allocator<int>::pointer,
+                                         MAI::Allocator<int>::const_pointer>;
+   bool p2voidP = std::is_convertible_v<MAI::Allocator<int>::pointer,
+                                        MAI::Allocator<int>::void_pointer>;
+   bool p2constVoidP =
+       std::is_convertible_v<MAI::Allocator<int>::pointer,
+                             MAI::Allocator<int>::const_void_pointer>;
+   bool constP2constVoidP =
+       std::is_convertible_v<MAI::Allocator<int>::const_pointer,
+                             MAI::Allocator<int>::const_void_pointer>;
+   bool voidP2constVoidP =
+       std::is_convertible_v<MAI::Allocator<int>::void_pointer,
+                             MAI::Allocator<int>::const_void_pointer>;
 
-   std::vector<int, MyIntAllocator> intVector;
-   intVector.push_back(42);
-
-   EXPECT_EQ(intVector.size(), 1);
-   EXPECT_EQ(intVector[0], 42);
+   ASSERT_TRUE(p2constP && p2voidP && p2constVoidP && constP2constVoidP &&
+               voidP2constVoidP);
 }
 
-TEST(MyAllocatorTest, AllocateAndDeallocateMultiple) {
-   using MyIntAllocator = MyAllocator<int>;
+TEST(AllocatorTestSet, allocateTest) {
+   MAI::Allocator<int, 2> allocator;
 
-   std::vector<int, MyIntAllocator> intVector;
-   for (int i = 0; i < 100; ++i) {
-      intVector.push_back(i);
-   }
+   int* pint = allocator.allocate(1);
 
-   EXPECT_EQ(intVector.size(), 100);
-   for (int i = 0; i < 100; ++i) {
-      EXPECT_EQ(intVector[i], i);
-   }
-}
+   EXPECT_NE(pint, nullptr);
+   EXPECT_THROW(allocator.allocate(1000), std::bad_alloc);
 
-int main(int argc, char** argv) {
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
+   allocator.deallocate(pint);
 }
