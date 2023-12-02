@@ -1,4 +1,3 @@
-
 #ifndef LAB5_DISTANCECALCULATOR_H
 #define LAB5_DISTANCECALCULATOR_H
 
@@ -8,7 +7,6 @@
 using namespace Mobs;
 
 class DistanceCalculator {
-
 public:
     static double CalculateDistance(NPC *pNpc, NPC *pNpc1) {
         return sqrt(pow(pNpc->position.GetX() - pNpc1->position.GetX(), 2) +

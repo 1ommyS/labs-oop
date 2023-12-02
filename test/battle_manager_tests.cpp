@@ -62,6 +62,5 @@ TEST(BattleManagerTest, StartBattle) {
     battleManager.StartBattle(npcs, &gameManager);
 
     // Assert
-    // Add assertions based on the expected behavior after the battle starts
 }
 
