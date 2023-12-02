@@ -1,11 +1,18 @@
-#pragma once;
+#pragma once
 
-namespace mobs {
+#include "NPC.h"
 
-class Werewolf : public NPC {
-  public:
-   void accept(Battle* battle) override { battle->fight(this); }
-   void sayHello() override { std::cout << "hello, im werewolf"; }
-};
+namespace Mobs {
 
-}  // namespace mobs
+    class Werewolf : public NPC {
+    public:
+        Werewolf(int32_t x, int32_t y, std::string _name) : NPC(x, y, _name) {};
+
+        void Die() override {
+            delete this;
+        }
+
+        ~Werewolf();
+    };
+
+}  // namespace Mobs

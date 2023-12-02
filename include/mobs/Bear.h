@@ -1,10 +1,18 @@
-#pragma once;
-#include "iostream"
-namespace mobs {
-class Bear : public NPC {
-  public:
-   void accept(Battle* battle) override { battle->fight(this); }
-   void sayHello() override { std::cout << "hello, im bear"; }
-};
+#pragma once
 
-}  // namespace mobs
+#include <iostream>
+#include "NPC.h"
+
+namespace Mobs {
+
+    class Bear : public NPC {
+    public:
+
+        Bear(int32_t x, int32_t y, std::string _name) : NPC(x, y, _name) {};
+
+        void Die() override {
+            delete this;
+        }
+    };
+
+}  // namespace Mobs

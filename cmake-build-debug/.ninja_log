@@ -1,0 +1,10 @@
+# ninja log v5
+444	451	1701458459857053011	liblab5_lib.a	943c1d6747e38377
+0	235	1701458362049979650	CMakeFiles/lab5_lib.dir/src/battleMap/Position.cpp.o	4e955138a1aaa30e
+0	443	1701458459849053086	CMakeFiles/lab5_lib.dir/src/battleMap/main.cpp.o	9e36c2df6a7b19f3
+1	14	1701454871060104705	CMakeFiles/lab5_exe.dir/main.cpp.o	e971d36a48be3355
+242	288	1701030289043608618	lab5_exe	5d23ab403740f842
+1	196	1701459205384488906	CMakeFiles/lab5_lib.dir/src/battles/BattleManager.cpp.o	9de5316a934e5ec0
+0	263	1701459205452488130	CMakeFiles/lab5_lib.dir/src/GameManager.cpp.o	8b4631b8405a4579
+263	268	1701459205456488085	liblab5_lib.a	9e6074d850ad90e2
+1	478	1701459205664485715	CMakeFiles/lab5_exe.dir/main.cpp.o	e971d36a48be3355

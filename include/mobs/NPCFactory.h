@@ -1,19 +1,22 @@
-#pragma once;
+#pragma once
 #include "NPC.h"
+#include "Bear.h"
+#include "Outlaw.h"
+#include "Werewolf.h"
 #include "NPCType.h"
 
-namespace mobs {
+namespace Mobs {
 
 class NPCFactory {
   public:
-   NPC* createNPC(NPCType type) {
+   static NPC* createNPC(NPCType type, int32_t x, int32_t y, std::string name) {
       switch (type) {
          case NPCType::Outlaw:
-            return new Outlaw();
+            return reinterpret_cast<NPC*>(new Outlaw(x,y,name));
          case NPCType::Werewolf:
-            return new Werewolf();
+            return reinterpret_cast<NPC*>(new Werewolf(x,y,name));
          case NPCType::Bear:
-            return new Bear();
+            return reinterpret_cast<NPC*>(new Bear(x,y,name));
          default:
             return nullptr;
       }

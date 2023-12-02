@@ -1,17 +1,18 @@
-.PHONY: build run test
+.PHONY: build
 
-build: clean-build
-	mkdir build
-	git submodule init
-	git submodule update
-	cd ./build; cmake ..; make all
+build:
+	mkdir -p build
+	cd ./build; cmake ..; cmake --build .
 
 run:
 	./build/*_exe
 
-test:
-	./build/*_test
+clean:
+	rm -rf ./build
 
-clean-build:
-	rm -rf ./build/
-	
+test-list:
+	./build/test/*_test_list
+
+test-allocator:
+	./build/test/*_test_allocator
+

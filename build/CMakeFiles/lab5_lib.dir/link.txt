@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc liblab5_lib.a CMakeFiles/lab5_lib.dir/src/GameManager.cpp.o CMakeFiles/lab5_lib.dir/src/battleMap/Position.cpp.o CMakeFiles/lab5_lib.dir/src/battles/BattleManager.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib liblab5_lib.a

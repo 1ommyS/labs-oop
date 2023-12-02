@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -fsanitize=undefined -fsanitize=address CMakeFiles/lab5_test_allocator.dir/test_allocator.cpp.o -o lab5_test_allocator  ../liblab5_lib.a ../lib/libgtest_main.a ../lib/libgtest.a 
