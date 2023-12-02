@@ -1,0 +1,14 @@
+# Target labels
+ googletest
+# Source files and their labels
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/CMakeFiles/googletest
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/CMakeFiles/googletest.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/CMakeFiles/googletest-complete.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-build.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-configure.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-download.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-install.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-mkdir.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-patch.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-test.rule
+/home/anthony/MAI_OOP/lab5/cmake-build-debug/test/googletest-download/googletest-prefix/src/googletest-stamp/googletest-update.rule

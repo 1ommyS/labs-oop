@@ -1,33 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
-project(lab0)
+project(lab5)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(test)
 
-add_compile_options(-g -rdynamic)
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADERS ${PROJECT_SOURCE_DIR}/src/*.h)
 
-add_subdirectory(lib/googletest)
+# Project main lib
+add_library(${PROJECT_NAME}_lib ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME}_lib PUBLIC "${PROJECT_SOURCE_DIR}/include")
+target_compile_options(${PROJECT_NAME}_lib PUBLIC "-Wall" "-Werror" "-g" "-fsanitize=undefined" "-fsanitize=address")
+target_link_options(${PROJECT_NAME}_lib PUBLIC "-fsanitize=undefined" "-fsanitize=address")
 
-set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-include_directories(${INCLUDE_DIR})
-
-set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
-set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
-
-file(GLOB_RECURSE SOURCES LIST_DIRECTORIES false ${SOURCE_DIR}/*.cpp)
-
-file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false ${TEST_DIR}/*.cpp)
-
-add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCES})
-
-add_executable(${CMAKE_PROJECT_NAME}_exe main.cpp)
-
-target_link_libraries(${CMAKE_PROJECT_NAME}_exe PRIVATE ${CMAKE_PROJECT_NAME}_lib)
-
-add_executable(${CMAKE_PROJECT_NAME}_test ${TEST_SOURCES})
-
-target_include_directories(${CMAKE_PROJECT_NAME}_test PRIVATE ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-
-target_link_libraries(${CMAKE_PROJECT_NAME}_test PRIVATE ${CMAKE_PROJECT_NAME}_lib gtest gtest_main)
+# main executable target
+add_executable(${PROJECT_NAME}_exe ${PROJECT_SOURCE_DIR}/main.cpp)
+target_link_libraries(${PROJECT_NAME}_exe ${PROJECT_NAME}_lib)

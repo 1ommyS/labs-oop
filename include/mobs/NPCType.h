@@ -1,0 +1,1 @@
+enum class NPCType { Bear, Outlaw, Werewolf };
